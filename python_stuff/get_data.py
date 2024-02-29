@@ -12,7 +12,7 @@ send_data = str({
     "options": options,
     "answer": answer
 })
-ngrok_link = "https://617f-34-134-248-15.ngrok-free.app/"
+ngrok_link = "https://5daa-35-197-98-247.ngrok-free.app/"
 url = ngrok_link+'run?msg='+send_data
 start = time.time()
 try:
