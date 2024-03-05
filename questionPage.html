@@ -5,12 +5,45 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/f393143bf3.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="hourglass.css">
 </head>
 
 <body style="background:black">
 
-    <section class="radio-section" style="position:absolute; top:10%; left: 35%;">
+	<button class="button" onclick="goBack()" style="position:absolute; z-index:110; top:0; left:0">
+		<span class="button-text" style="font-size: 2rem;">←</span>
+		<div class="fill-container"></div>
+	  </button>
+
+	  <div class="main" style="position:absolute; left:20%; top:50%; visibility: hidden;">
+		<p style="position:absolute; color:green; left:5%;top:-25%">Correct!</p>
+		<div class="icon">
+		  <svg height="80" width="80">
+			<circle cx="40" cy="40" r="35" stroke="white" stroke-width="4" fill="none"></circle>
+		  </svg>
+		  <i class="fa-solid fa-check"></i>
+		</div>
+	  </div>
+
+	  <div class="main2 wrong" style="position:absolute; left:20%; top:50%; visibility: hidden;">
+		<p style="position:absolute; color:red; left:5%;top:-25%">Incorrect!</p>
+		<div class="icon2" style="background:red">
+		  <svg height="80" width="80">
+			<circle cx="40" cy="40" r="35" stroke="white" stroke-width="4" fill="none"></circle>
+		  </svg>
+		  <i class="fa-solid fa-xmark"></i>
+		</div>
+	  </div>
+
+	<div class="loadScreen" style="position:absolute; display:flex; opacity:0.8; align-items:center; justify-content:center; background-color:white; z-index:100; width:100%; height:100%">
+		<div class="hourglass"></div>
+		<p style="position:absolute; font-weight:bold; top: 70vh">Generating Question ⌛...</p>
+		<p class="errorOccured" style="position:absolute; font-weight:bold; top: 80vh; visibility: hidden; color:red">An Error Ocurred ❌, retrying...</p>
+	</div>
+
+    <section class="radio-section" style="position:absolute; top:10%; left: 35%; width:43%">
 		<div class="radio-list">
 			<h1 style="color:white" class="question">Question: </h1>
 			<div class="radio-item"><input name="radio" id="radio1" type="radio"><label for="radio1">A: </label></div>
@@ -20,7 +53,7 @@
 		</div>
 	</section>
 
-    <a class="neon" href="questionPage.html" style="position:absolute; left:40%; top:85%; color: white">Submit</a>
+    <a class="neon" onclick="checkAnswer()" style="position:absolute; left:50%; top:75%; color: white">Submit</a>
 
 	<script src="questionPage.js"></script>
 </body>

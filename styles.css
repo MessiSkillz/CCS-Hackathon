@@ -121,20 +121,24 @@ body {
 }
 
 .neon {
-  margin-top: -150px;
-  font-size: var(--font-size);
+  font-size: clamp(14px, 3vw, 24px); /* Responsive font size */
   display: inline-block;
-  position: relative;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 90%;
+  color: white;
+  text-decoration: none;
   cursor: pointer;
   border: var(--clr-neon) 0.125em solid;
-  padding: 0.25em 1em;
+  padding: 1em 4em;
   border-radius: 0.25em;
   text-shadow: 
-    0 0 .20em #FFF7,
-    0 0 .30em var(--clr-neon);
+    0 0 0.20em #FFF7,
+    0 0 0.30em var(--clr-neon);
   box-shadow: 
-    inset 0 0 .5em var(--clr-neon),
-          0 0 .5em var(--clr-neon);
+    inset 0 0 0.5em var(--clr-neon),
+          0 0 0.5em var(--clr-neon);
 }
 
 .neon::before {
@@ -172,12 +176,14 @@ body {
 .neon:hover::after {
   opacity: 1;
 }
-.neon:hover, .neon:focus {
+.neon:hover,
+.neon:focus {
   color: white;
 }
 .neon:hover::before {
   opacity: 0.8;
 }
+
 
 
 @import url('https://fonts.googleapis.com/css?family=Damion|Muli:400,600');
@@ -343,3 +349,205 @@ nav a:nth-child(5):hover~span {
   transition: 2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
+
+.button {
+  position: relative;
+  padding: 5px 20px;
+  border-radius: 100vw;
+  background-color: transparent;
+  font-family: 'Playfair Display', serif;
+  color: #fafafa;
+  border: solid 5px #524eee;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+}
+.button .button-text {
+  position: relative;
+  z-index: 2;
+}
+.button .fill-container {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  padding-bottom: 100%;
+  transform: translateY(-50%) rotate(180deg);
+}
+.button .fill-container::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #524eee;
+  border-radius: 50%;
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateY(-100%);
+}
+.button:hover {
+  border-color: blue;
+  transform: translateY(-4px);
+}
+.button:hover .fill-container {
+  transform: translateY(-50%) rotate(0);
+}
+.button:hover .fill-container::after {
+  transform: translateY(0);
+}
+html, body {
+  height: 100%;
+}
+
+
+.alert {
+  position: relative;
+  top: 10;
+  left: 0;
+  width: 20%;
+  height: auto;
+  padding: 10px;
+  margin: 10px;
+  line-height: 1.8;
+  border-radius: 5px;
+  cursor: hand;
+  cursor: pointer;
+  font-family: sans-serif;
+  font-weight: 400;
+}
+
+.alertCheckbox {
+  display: none;
+}
+
+:checked + .alert {
+  display: none;
+}
+
+.alertText {
+  display: table;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 16px;
+}
+
+.alertClose {
+  float: right;
+  padding-top: 5px;
+  font-size: 10px;
+}
+
+.clear {
+  clear: both;
+}
+
+.info {
+  background-color: #EEE;
+  border: 1px solid #DDD;
+  color: #999;
+}
+
+.success {
+  background-color: #EFE;
+  border: 1px solid #DED;
+  color: #9A9;
+}
+
+.notice {
+  background-color: #EFF;
+  border: 1px solid #DEE;
+  color: #9AA;
+}
+
+.warning {
+  background-color: #FDF7DF;
+  border: 1px solid #FEEC6F;
+  color: #C9971C;
+}
+
+.error {
+  background-color: #FEE;
+  border: 1px solid #EDD;
+  color: #A66;
+}
+
+.main{
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  display: flex;
+  cursor: pointer;
+  z-index: 5;
+}
+.icon{
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 20px;
+  border-radius: 50px;
+  transition: all .8s;
+  background: #25D366;
+  box-shadow: 0 0 20px #25D366;
+}
+.icon:hover{
+  box-shadow: 0 0 80px #25D366;
+}
+.icon i{
+  color: white;
+  position: absolute;;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2em;
+}
+svg circle{
+  stroke-dasharray: 150;
+  transition: all .8s;
+  stroke-dasharray: 220;
+}
+.icon:hover svg circle{
+  stroke-dasharray: 220;
+}
+
+
+.main2{
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  display: flex;
+  cursor: pointer;
+  z-index: 5;
+}
+.icon2{
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 20px;
+  border-radius: 50px;
+  transition: all .8s;
+  background: red;
+  box-shadow: 0 0 20px red;
+}
+.icon2:hover{
+  box-shadow: 0 0 80px red;
+}
+.icon2 i{
+  color: white;
+  position: absolute;;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2em;
+}
+svg circle{
+  stroke-dasharray: 150;
+  transition: all .8s;
+  stroke-dasharray: 220;
+}
+.icon2:hover svg circle{
+  stroke-dasharray: 220;
+}

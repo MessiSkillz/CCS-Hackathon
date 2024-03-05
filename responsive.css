@@ -1,0 +1,297 @@
+/* Global Reset and Fonts */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  ul {
+    list-style-type: none;
+  }
+  
+  @import url("https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300;400;700&display=swap");
+  @import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
+  @import url('https://fonts.googleapis.com/css?family=Damion|Muli:400,600');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+  :root {
+    --clr-neon: #524eee;
+  }
+  
+  .neon {
+    font-size: clamp(14px, 3vw, 24px); /* Responsive font size */
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 90%;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    border: var(--clr-neon) 0.125em solid;
+    padding: 1em 5em;
+    border-radius: 0.25em;
+    text-shadow: 
+      0 0 0.20em #FFF7,
+      0 0 0.30em var(--clr-neon);
+    box-shadow: 
+      inset 0 0 0.5em var(--clr-neon),
+            0 0 0.5em var(--clr-neon);
+  }
+  
+  .neon::before {
+    content: "";
+    position: absolute;
+    top: 140%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--clr-neon);
+    transform: 
+      perspective(0.2em)
+      rotateX(10deg) 
+      scale(1.3, 0.40);
+    filter: blur(0.5em);
+    opacity: 0.6;
+    pointer-events: none;
+    transition: opacity 100ms linear;
+  }
+  
+  .neon::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--clr-neon);
+    box-shadow: 0 0 2em var(--clr-neon);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 100ms linear;
+  }
+  
+  .neon:hover::after {
+    opacity: 1;
+  }
+  .neon:hover,
+  .neon:focus {
+    color: white;
+  }
+  .neon:hover::before {
+    opacity: 0.8;
+  }
+  
+  /* Responsive Navigation */
+  nav {
+    position: relative;
+    width: 100%;
+    min-height: 80px;
+    background: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  nav a {
+    position: relative;
+    display: inline-block;
+    font-size: clamp(14px, 2vw, 20px);
+    color: #fff;
+    text-decoration: none;
+    padding: 0 23px;
+    z-index: 1;
+  }
+  
+  nav span {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    width: 95px;
+    height: 60%;
+    background: #524eee;
+    border-radius: 8px;
+    transition: .5s ease;
+    opacity: 0.7;
+  }
+  
+  nav a:nth-child(1):hover~span {
+    left: 34.5vw;
+  }
+  
+  nav a:nth-child(2):hover~span {
+    left: 39.5vw;
+  }
+  
+  nav a:nth-child(3):hover~span {
+    left: 45.5vw;
+    width: 110px;
+  }
+  
+  nav a:nth-child(4):hover~span {
+    left: 52vw;
+    width: 115px;
+  }
+  
+  nav a:nth-child(5):hover~span {
+    left: 59.5vw;
+    width: 110px;
+  }
+  
+  /* Other Styles */
+  .icon-bar {
+    width: 100px;
+    background-color: #524eee;
+    opacity: 0.8;
+  }
+  
+  .icon-bar a {
+    display: block;
+    text-align: center;
+    padding: 20px;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 36px;
+  }
+  
+  .icon-bar a:hover {
+    background-color: #000;
+  }
+  
+  .active {
+    background-color: #FF5733;
+  }
+  
+  .container {
+    padding: 25px;
+  }
+  
+  .radio-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+  }
+  
+  .radio-item [type="radio"] {
+    display: none;
+  }
+  
+  .radio-item + .radio-item {
+    margin-top: 15px;
+  }
+  
+  .radio-item label {
+    display: block;
+    padding: 20px 60px;
+    background: #1d1d42;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 400;
+    min-width: 250px;
+    white-space: nowrap;
+    position: relative;
+    transition: 0.4s ease-in-out 0s;
+    color: white;
+  }
+  
+  .radio-item label:after,
+  .radio-item label:before {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+  }
+  
+  .radio-item label:after {
+    height: 19px;
+    width: 19px;
+    border: 2px solid #524eee;
+    left: 19px;
+    top: calc(50% - 12px);
+  }
+  
+  .radio-item label:before {
+    background: #524eee;
+    height: 20px;
+    width: 20px;
+    left: 21px;
+    top: calc(50% - 5px);
+    transform: scale(5);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.4s ease-in-out 0s;
+  }
+  
+  .radio-item [type="radio"]:checked ~ label {
+    border-color: #524eee;
+  }
+  
+  .radio-item [type="radio"]:checked ~ label::before {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+  }
+  
+  #cube-container {
+    box-sizing: border-box;
+    transform-style: preserve-3d;
+    top: 50%;
+    left: 50%;
+    position: relative;
+    width: 250px;
+    height: 250px;
+    transform: rotateX(-25deg) rotateY(-40deg) translate(-50%, -50%);
+    transition: 2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  }
+  
+  #cube-container .face {
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    border: 2px solid #526eee;
+    background: #524eee 70;
+    box-shadow: 0px 0px 100px #524eee;
+  }
+  
+  #cube-container .face.top {
+    transform: rotateX(90deg);
+    margin-top: -50%;
+  }
+  
+  #cube-container .face.right {
+    transform: rotateY(90deg);
+    margin-left: 50%;
+  }
+  
+  #cube-container .face.left {
+    transform: rotateY(-90deg);
+    margin-left: -50%;
+  }
+  
+  #cube-container .face.bottom {
+    transform: rotateX(90deg);
+    margin-top: 50%;
+  }
+  
+  #cube-container .face.back {
+    transform: translateZ(125px);
+  }
+  
+  #cube-container .face.front {
+    transform: translateZ(-125px);
+  }
+  
+  #cube-container:hover {
+    transform: rotateX(-25deg) rotateY(-40deg) translate(-50%, -50%);
+    transition: 2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  }
+  
