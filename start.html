@@ -26,14 +26,14 @@
 	<section class="radio-section" style="position:absolute; top:20%; left: 35%;">
 		<div class="radio-list">
 			<h1 style="color:white">Which Subject would you like to practice?</h1>
-			<div class="radio-item"><input name="radio" id="radio1" type="radio"><label for="radio1">Math</label></div>
+			<div class="radio-item"><input onclick="getSelectedValue()" name="radio" id="radio1" type="radio"><label for="radio1">Math</label></div>
 			<div class="radio-item"><input name="radio" id="radio2" type="radio"><label for="radio2">History</label></div>
 			<div class="radio-item"><input name="radio" id="radio3" type="radio"><label for="radio3">English</label></div>
 			<div class="radio-item"><input name="radio" id="radio4" type="radio"><label for="radio4">Science</label></div>
 		</div>
 	</section>
 
-	<a class="neon" href="sampleInput.html" style="position:absolute; left:45%; top:95%; color: white">Next</a>
+	<a class="neon" href="sampleInput.html" onclick="getSelectedValue()" style="position:absolute; left:50%; top:80%; color: white">Next</a>
 	
 	<script src="start.js"></script>
 </body>
