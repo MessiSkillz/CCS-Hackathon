@@ -12,7 +12,7 @@ send_data = str({
     "options": options,
     "answer": answer
 })
-ngrok_link = "https://5daa-35-197-98-247.ngrok-free.app/"
+ngrok_link = "https://528a-34-70-18-144.ngrok-free.app/"
 url = ngrok_link+'run?msg='+send_data
 start = time.time()
 try:
@@ -26,7 +26,10 @@ except requests.RequestException as e:
 print("Time taken:", time.time()-start)
 print("Here's your generated question:")
 import json
-data = json.loads(data.replace("'", "\""))
+import re
+pattern = r"(?<=\W)'(.*?)'(?=\W)"
+output_string = re.sub(pattern, lambda x: f'"{x.group(1)}"', data)
+data = json.loads(output_string)
 question = data['question']
 options = data['options']
 answer = data['answer']
