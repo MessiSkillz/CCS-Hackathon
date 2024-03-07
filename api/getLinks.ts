@@ -1,4 +1,5 @@
 import Redis from "ioredis";
+
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
