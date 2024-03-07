@@ -1,27 +1,4 @@
 
-
-function getNgrokLink(){
-  return new Promise(async function(resolve, reject)  {
-    const url =  "https://question-craft-backend.vercel.app/";
-
-    fetch(url+"getLinks")
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json(); // Assuming the response is in JSON format
-      })
-      .then(data => {
-        console.log('Data:', data.data);
-        resolve(data.data);
-      })
-      .catch(error => {
-        console.error('Error:', error.message);
-        reject();
-      });
-  })
-}
-
 let answer = "";
 let data = JSON.parse(localStorage.getItem("data"));
 console.log(data);
