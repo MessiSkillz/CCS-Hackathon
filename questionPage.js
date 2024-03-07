@@ -1,48 +1,44 @@
-
 let answer = "";
 let data = JSON.parse(localStorage.getItem("data"));
 console.log(data);
 
 makeFetch();
 
-function makeFetch(){
+function makeFetch() {
   fetchData(data)
     .then(() => {
       document.querySelector(".loadScreen").style.visibility = "hidden";
       document.querySelector(".errorOccured").style.visibility = "hidden";
     })
-    .catch(function(error){
+    .catch(function (error) {
       document.querySelector(".errorOccured").style.visibility = "visible";
       console.log(error);
-      pause(100)
-        .then(()=>{
-          makeFetch();
-        })
+      pause(100).then(() => {
+        makeFetch();
+      });
     });
 }
 
-function pause(time){
-  return new Promise(resolve => setTimeout(resolve, time));
+function pause(time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
 }
 
-async function getNgrokLink(){
-  return new Promise(async function(resolve, reject){
-      const url =  "https://questioncraft-git-yash-easwars-projects.vercel.app/api/";
-
-  fetch(url+"getLinks")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return response.json(); // Assuming the response is in JSON format
-    })
-    .then(data => {
-      //console.log('Data:', data.data);
-      resolve(data.data);
-    })
-    .catch(error => {
-      console.error('Error:', error.message);
-    });
+async function getNgrokLink() {
+  return new Promise(async function (resolve, reject) {
+    fetch("/api/getLinks")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json(); // Assuming the response is in JSON format
+      })
+      .then((data) => {
+        //console.log('Data:', data.data);
+        resolve(data.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error.message);
+      });
   });
 }
 
@@ -66,7 +62,7 @@ class TypeWriter {
   }
 }
 
-function goBack(){
+function goBack() {
   localStorage.clear();
   window.location.href = "sampleInput.html";
 }
@@ -74,29 +70,29 @@ function goBack(){
 async function fetchData(sendData) {
   console.log(sendData);
   let ngrokLink = "";
-  await getNgrokLink()
-    .then(response =>{
-      ngrokLink = response;
-    })
-  const url = ngrokLink + 'run?msg=' + encodeURIComponent(JSON.stringify(sendData));
+  await getNgrokLink().then((response) => {
+    ngrokLink = response;
+  });
+  const url =
+    ngrokLink + "run?msg=" + encodeURIComponent(JSON.stringify(sendData));
   console.log(url);
 
   return new Promise((resolve, reject) => {
     fetch(url, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'ngrok-skip-browser-warning': 'history',
-        'Accept': 'application/json',
-      }
+        "ngrok-skip-browser-warning": "history",
+        Accept: "application/json",
+      },
     })
-      .then(response => {
+      .then((response) => {
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error('Error during fetch: ' + response.statusText);
+          throw new Error("Error during fetch: " + response.statusText);
         }
       })
-      .then(data => {
+      .then((data) => {
         const json = JSON.parse(data.output.replace(/'/g, '"'));
         str = json.question;
         const tp1 = new TypeWriter();
@@ -106,26 +102,28 @@ async function fetchData(sendData) {
         console.log(answer);
         resolve(); // Resolve the promise once the asynchronous operation is complete
       })
-      .catch(error => {
+      .catch((error) => {
         reject(error); // Reject the promise if there's an error
       });
   });
 }
 
-
-function setOptions(options){
+function setOptions(options) {
   let typeWriters = [];
-  console.log(options.length)
-  for(let i = 0; i<=3; i++){
+  console.log(options.length);
+  for (let i = 0; i <= 3; i++) {
     typeWriters.push(new TypeWriter());
-    console.log(options[i])
-    typeWriters[i].type(options[i], document.querySelectorAll(".radio-item")[i].querySelector("label"))
+    console.log(options[i]);
+    typeWriters[i].type(
+      options[i],
+      document.querySelectorAll(".radio-item")[i].querySelector("label")
+    );
   }
 }
 
-function checkAnswer(){
-  let userInput = getSelectedValue().substring(0,1);
-  if(answer==userInput){ 
+function checkAnswer() {
+  let userInput = getSelectedValue().substring(0, 1);
+  if (answer == userInput) {
     document.querySelector(".main").style.visibility = "visible";
     document.querySelector(".main2").style.visibility = "hidden";
     document.querySelector(".neon").innerHTML = "Generate New";
@@ -143,15 +141,14 @@ function checkAnswer(){
     //document.querySelector(".neon").href = "sampleInput.html";
     page();
     //localStorage.clear();
-  }
-  else{
+  } else {
     let icon = document.querySelector(".wrong");
     document.querySelector(".wrong").style.visibility = "visible";
   }
 }
 
-function page(){
-  console.log(document.querySelector(".neon"))
+function page() {
+  console.log(document.querySelector(".neon"));
   document.body.removeChild(document.querySelector(".neon"));
   let newBtn = document.createElement("a");
   newBtn.classList.add("neon");
@@ -165,13 +162,13 @@ function page(){
 }
 
 function getSelectedValue() {
-  const radioButtons = document.getElementsByName('radio');
+  const radioButtons = document.getElementsByName("radio");
   for (const radioButton of radioButtons) {
-      if (radioButton.checked) {
-          let id = radioButton.id.substring(5);
-          let radioItems = document.querySelectorAll(".radio-item");
-          return radioItems[id-1].querySelector("label").innerText;
-      }
+    if (radioButton.checked) {
+      let id = radioButton.id.substring(5);
+      let radioItems = document.querySelectorAll(".radio-item");
+      return radioItems[id - 1].querySelector("label").innerText;
+    }
   }
   return null;
 }

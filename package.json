@@ -1,0 +1,16 @@
+{
+  "name": "CCS-Hackathon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Yash Singh",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.25",
+    "ioredis": "^5.3.2"
+  }
+}
