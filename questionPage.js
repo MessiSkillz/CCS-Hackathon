@@ -24,6 +24,28 @@ function makeFetch(){
 function pause(time){
   return new Promise(resolve => setTimeout(resolve, time));
 }
+
+async function getNgrokLink(){
+  return new Promise(async function(resolve, reject){
+      const url =  "https://question-craft-backend.vercel.app/";
+
+  fetch(url+"getLinks")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json(); // Assuming the response is in JSON format
+    })
+    .then(data => {
+      //console.log('Data:', data.data);
+      resolve(data.data);
+    })
+    .catch(error => {
+      console.error('Error:', error.message);
+    });
+  });
+}
+
 //var i = 0;
 //typeWriter(str);
 
