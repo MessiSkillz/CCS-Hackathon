@@ -1,15 +1,4 @@
-const Redis = require('ioredis');
-const redisClient = new Redis({
-  host: 'usw1-organic-yak-33107.upstash.io',
-  port: 33107,
-  password: process.env.UPSTASH_PD, 
-});
-async function getNgrokLink() {
-  const ngrokLink = await redisClient.get('ngrokLink');
-  const link = JSON.parse(ngrokLink).ngrok_url;
-  return link + "/";
-}
-const ngrokLink = getNgrokLink();
+
 let answer = "";
 let data = JSON.parse(localStorage.getItem("data"));
 console.log(data);
@@ -35,6 +24,28 @@ function makeFetch(){
 function pause(time){
   return new Promise(resolve => setTimeout(resolve, time));
 }
+
+async function getNgrokLink(){
+  return new Promise(async function(resolve, reject){
+      const url =  "https://question-craft-backend.vercel.app/";
+
+  fetch(url+"getLinks")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json(); // Assuming the response is in JSON format
+    })
+    .then(data => {
+      //console.log('Data:', data.data);
+      resolve(data.data);
+    })
+    .catch(error => {
+      console.error('Error:', error.message);
+    });
+  });
+}
+
 //var i = 0;
 //typeWriter(str);
 
@@ -62,6 +73,11 @@ function goBack(){
 
 async function fetchData(sendData) {
   console.log(sendData);
+  let ngrokLink = "";
+  await getNgrokLink()
+    .then(response =>{
+      ngrokLink = response;
+    })
   const url = ngrokLink + 'run?msg=' + encodeURIComponent(JSON.stringify(sendData));
   console.log(url);
 
@@ -109,7 +125,7 @@ function setOptions(options){
 
 function checkAnswer(){
   let userInput = getSelectedValue().substring(0,1);
-  if(answer==userInput){
+  if(answer==userInput){ 
     document.querySelector(".main").style.visibility = "visible";
     document.querySelector(".main2").style.visibility = "hidden";
     document.querySelector(".neon").innerHTML = "Generate New";
