@@ -103,7 +103,7 @@ function setOptions(options){
 
 function checkAnswer(){
   let userInput = getSelectedValue().substring(0,1);
-  if(answer==userInput){
+  if(answer==userInput){ 
     document.querySelector(".main").style.visibility = "visible";
     document.querySelector(".main2").style.visibility = "hidden";
     document.querySelector(".neon").innerHTML = "Generate New";
