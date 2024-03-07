@@ -1,15 +1,4 @@
-const Redis = require('ioredis');
-const redisClient = new Redis({
-  host: 'usw1-organic-yak-33107.upstash.io',
-  port: 33107,
-  password: process.env.UPSTASH_PD, 
-});
-async function getNgrokLink() {
-  const ngrokLink = await redisClient.get('ngrokLink');
-  const link = JSON.parse(ngrokLink).ngrok_url;
-  return link + "/";
-}
-const ngrokLink = getNgrokLink();
+
 let answer = "";
 let data = JSON.parse(localStorage.getItem("data"));
 console.log(data);
@@ -62,6 +51,11 @@ function goBack(){
 
 async function fetchData(sendData) {
   console.log(sendData);
+  let ngrokLink = "";
+  await getNgrokLink()
+    .then(response =>{
+      ngrokLink = response;
+    })
   const url = ngrokLink + 'run?msg=' + encodeURIComponent(JSON.stringify(sendData));
   console.log(url);
 
