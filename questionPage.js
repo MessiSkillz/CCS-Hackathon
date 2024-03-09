@@ -27,7 +27,7 @@ function pause(time){
 
 async function getNgrokLink(){
   return new Promise(async function(resolve, reject){
-      const url =  "https://questioncraft-git-yash-easwars-projects.vercel.app/api/";
+      const url =  "https://question-craft-backend.vercel.app/";
 
   fetch(url+"getLinks")
     .then(response => {
