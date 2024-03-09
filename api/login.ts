@@ -28,7 +28,10 @@ export async function POST(req: Request) {
   const token = Math.random().toString(36).substring(2);
 
   if (pass === bcrypt.hashSync(password, 10)) {
-    await client.set(`tok:${username}`, token);
+    await Promise.allSettled([
+      client.set(`tok:${username}`, token),
+      client.set(`user:${token}`, username),
+    ]);
 
     const respHeaders = new Headers();
     const respCookies = new ResponseCookies(respHeaders);
@@ -41,6 +44,7 @@ export async function POST(req: Request) {
     await Promise.allSettled([
       client.set(`tok:${username}`, token),
       client.set(`pass:${username}`, bcrypt.hashSync(password, 10)),
+      client.set(`user:${token}`, username),
     ]);
 
     const respHeaders = new Headers();
